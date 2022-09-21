@@ -29,21 +29,23 @@ main {
     grid-template: auto auto / repeat(5, 1fr);
     gap: 20px;
     margin: 20px;
-
+    padding: auto;
 }
 
-.die-face {
+.dice {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     height: 70px;
     width: 70px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
+    place-self: center;
+    padding: 5px;
 }
 
-.die-face:hover {
+.dice:hover {
     box-shadow: 0 5px 15px rgba(80, 53, 255, .4);
     transition-timing-function: ease-out;
     
@@ -54,10 +56,51 @@ main {
         transform: translateY(0);
 }
 
+.dice:active {
+    box-shadow: 0 5px 15px rgba(80, 53, 255, .4);
+    transition-timing-function: ease-out;
+
+    /* A litttttle slower on the way in */
+    transition: 0.25s;
+
+    /* Move into place */
+    transform: translateY(0);
+}
+
 .die-num {
     font-size: 2rem;
 }
+.dot {
+    background-color: black;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    place-self: center;
+}
 
+.top {
+    grid-row-start: 1;
+}
+
+.center {
+    grid-row-start: 2;
+}
+
+.bottom {
+    grid-row-start: 3;
+}
+
+.left {
+    grid-column-start: 1;
+}
+
+.middle {
+    grid-column-start: 2;
+}
+
+.right {
+    grid-column-end: -1;
+}
 .roll {
     height: 50px;
     width: 150px;
