@@ -1,68 +1,73 @@
 import './App.css';
-// import Confetti from 'react-confetti'
+import Confetti from 'react-confetti'
 import Die from './components/Die'
 import React from 'react';
+import { nanoid } from 'nanoid'
+
 
 function App() {
   const [dice, setDice] = React.useState(allNewDice())
+  const diceElements = dice.map((die, i) => <Die value={die.value} key={die.id} isHeld={die.isHeld} holdDice={() => holdDice(die.id)} />)
   const [tenzies, setTenzies] = React.useState(false)
 
   React.useEffect(() => {
+    const allHeld = dice.every(die => die.isHeld)
     const firstValue = dice[0].value
-    const allHeld = dice.every(die => die.held)
-    const allSameNumber = dice.every(die => die.value === firstValue)
+    const allSameValue = dice.every(die => die.value === firstValue)
 
-    if (allHeld && allSameNumber) {
+    if (allHeld && allSameValue) {
       setTenzies(true)
+      console.log("You won!")
     }
   }, [dice])
 
-  function randomDieValue() {
-    return Math.ceil(Math.random() * 6)
+
+  function generateNewDie() {
+    return { value: Math.ceil(Math.random() * 6), isHeld: false, id: nanoid() }
   }
 
+  // function utk generate 10 angka acak saat load page
   function allNewDice() {
-    const newArray = []
+    const numbers = []
     for (let i = 0; i < 10; i++) {
-      const newDie = {
-        value: randomDieValue(),
-        held: false,
-        id: i + 1
-      }
-      newArray.push(newDie)
+      numbers.push(generateNewDie())
     }
-    return newArray
+    return numbers
   }
 
-  function rollUnheldDice() {
+  //function untuk rollDice lagi setiap klik tombol
+  function rollDice() {
     if (!tenzies) {
-      setDice((oldDice) => oldDice.map((die, i) =>
-        die.held ?
+      setDice(oldDice => oldDice.map(die => {
+        return die.isHeld ?
           die :
-          { value: randomDieValue(), held: false, id: i + 1 }
-      ))
+          generateNewDie()
+      })
+      )
     } else {
-      setDice(allNewDice())
       setTenzies(false)
+      setDice(allNewDice())
     }
   }
 
   function holdDice(id) {
-    setDice(prevDice => prevDice.map((die) => {
-      return die.id === id ? { ...die, held: !die.held } : die
+    setDice(oldDice => oldDice.map(die => {
+      return die.id === id ? {
+        ...die, isHeld: !die.isHeld
+      } : die
     }))
   }
 
-  const diceElements = dice.map((die) => (
-    <Die key={die.id} {...die} hold={() => holdDice(die.id)} />
-  ))
 
   return (
     <main>
-      <h1>Tenzies</h1>
-      <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
-      <div className="die-container">{diceElements}</div>
-      <button className="roll-dice" onClick={rollUnheldDice}></button>
+      {tenzies && <Confetti />}
+      <h1>{tenzies ? "YOU WON!!!🎊" : "Tenzies"}</h1>
+      <p>{tenzies ? "" : "Roll until all dice are the same. Click each die to freeze it at its current value between rolls."}</p>
+      <div className="dice-container">
+        {diceElements}
+      </div>
+      <button className="roll" onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
     </main>
   );
 }
