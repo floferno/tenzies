@@ -24,6 +24,13 @@ main {
     padding: 20px 30px;
 }
 
+.start-menu {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
+}
+
 .dice-container {
     display:  grid;
     grid-template: auto auto / repeat(5, 1fr);
