@@ -39,7 +39,7 @@ export default function Die(props) {
 
     return (
 
-        <div onClick={props.holdDice} className={`${props.roll && "shake"} dice`} style={styles} >
+        <div onClick={props.holdDice} className={`${props.roll && "shake"} dice shake`} style={styles} >
             {face}
         </div>
     )

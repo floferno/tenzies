@@ -13,6 +13,9 @@ function App() {
   const [bestRoll, setBestRoll] = useState(
     JSON.parse(localStorage.getItem("bestRoll")) || 0
   )
+  const [bestTime, setBestTime] = useState(
+    JSON.parse(localStorage.getItem("bestTime")) || 0
+  );
   const [time, setTime] = useState(0)
 
   useEffect(() => {
@@ -24,48 +27,27 @@ function App() {
       setTime((prevTime) => prevTime + 10);
     }, 10);
 
-    // else if (tenzies || !start) {
-    //   clearInterval(interval);
-    // }
     return () => clearInterval(interval);
   }, [start, tenzies]);
-
-  //Set the time
-  // if (seconds > 59) {
-  //   setSeconds(0)
-  //   setMinutes(minute => minute + 1)
-  // }
-  // if (minutes > 59) {
-  //   setMinutes(0)
-  // }
-
-  // useEffect(() => {
-
-  //   let timer = setInterval(() => {
-  //     if (!start) {
-  //       return
-  //     }
-  //     if (tenzies) {
-  //       return
-  //     }
-  //     setSeconds(second => second + 1)
-  //   }, 1000)
-
-  //   return () => clearInterval(timer)
-  // }, [start, tenzies])
-
-  // useEffect(() => {
-  //   localStorage.setItem("bestTime", JSON.stringify(bestTime));
-  // }, [bestTime]);
 
   useEffect(() => {
     localStorage.setItem("bestRoll", JSON.stringify(bestRoll));
   }, [bestRoll, setRecords]);
 
+  useEffect(() => {
+    localStorage.setItem("bestTime", JSON.stringify(bestTime));
+  }, [bestTime]);
+
   function setRecords() {
-    // Check if bestRoll doesn't exist yet or newest rolls are better (smaller amount) than bestRolls if so reassign the variable
+    // Check if bestRoll doesn't exist yet or newest rolls are better (smaller amount) than bestRolls then reassign the variable
     if (!bestRoll || roll < bestRoll) {
       setBestRoll(roll);
+    }
+
+    const timeFloored = Math.floor(time / 10);
+    // Check if bestTime doesn't exist or newest time is lower than bestTime then reassign the variable
+    if (!bestTime || timeFloored < bestTime) {
+      setBestTime(timeFloored);
     }
   }
 
@@ -131,8 +113,8 @@ function App() {
   return (
     <main>
       {tenzies && <Confetti />}
-      <h1>{tenzies ? "CONGRATULATIONS! YOU WON!" : "Tenzies"}</h1>
-      {!start && <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>}
+      <h1 className="gradient-text">{tenzies ? "CONGRATULATIONS! YOU WON!" : "Tenzies"}</h1>
+      {!start && <p className="bold-text">Roll until all dice are the same. <br></br> Click each die to freeze it at its current value between rolls.</p>}
       {
         start &&
         <div className="start-menu">
@@ -148,8 +130,8 @@ function App() {
         {diceElements}
       </div>
       <button className="roll" onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
-      <ScoreBoard bestRoll={bestRoll}></ScoreBoard>
-    </main>
+      <ScoreBoard bestRoll={bestRoll} bestTime={bestTime}></ScoreBoard>
+    </main >
   );
 }
 
