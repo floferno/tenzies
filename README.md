@@ -4,15 +4,15 @@ Get all of the dice to be the same number! 🎲
 I've built this game by following Learn React Course on Scrimba and added extra features such as:
 - Using dots instead of numbers.
 - Using rolls tracker.
-- Tracking the time it takes to win.
-- Saving the best time to localStorage (Browser API) to keep data until it's cleared from the browser.
+- Using timer.
+- Saving the best roll and best time to localStorage (Browser API) to keep data until it's cleared from the browser.
 
 
 ## Home Page 
 
-![Screenshot 2022-09-21 155627](https://user-images.githubusercontent.com/58562757/191454111-201397f2-8ba0-4b6d-a327-e7f5470ceafd.png)
+![image](https://user-images.githubusercontent.com/58562757/192139710-4f7362f2-37e2-4452-9c29-8f819dd44814.png)
 
-![chrome-capture-2022-8-21](https://user-images.githubusercontent.com/58562757/191454132-7c6677cb-5dab-46f3-8598-13057212eed5.gif)
+![chrome-capture-2022-8-25](https://user-images.githubusercontent.com/58562757/192139794-ae3b5a2d-0eb2-413c-83cf-570421a4b1ab.gif)
 
 
 ### Stacks used:
@@ -26,7 +26,6 @@ I've built this game by following Learn React Course on Scrimba and added extra 
 
 - Web development
 - Components web development
-- Dynamic website
 - Mapping
 - Props
 - useEffect | useState
