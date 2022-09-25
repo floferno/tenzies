@@ -17,7 +17,7 @@ main {
     justify-content: space-evenly;
     align-items: center;
     width: 700px;
-    height: 400px;
+    height: 450px;
     background: #F5F5F5;
     border-radius: 10px;
     margin-top: 100px;
@@ -108,6 +108,23 @@ main {
 .right {
     grid-column-end: -1;
 }
+
+.shake {
+    animation: shake 0.5s infintie;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(8deg);
+    }
+    50% {
+        transform: rotate(-8deg);
+    }
+    100%{
+        transform: rotate(8deg);
+    }
+}
+
 .roll {
     height: 50px;
     width: 150px;
@@ -129,3 +146,8 @@ main {
     background: #361fcd;
 }
 
+.score-board {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}

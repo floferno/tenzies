@@ -1,7 +1,11 @@
 # Tenzies
 Get all of the dice to be the same number! 🎲
 
-(For Freecodecamp's Project.)
+I've built this game by following Learn React Course on Scrimba and added extra features such as:
+- Using dots instead of numbers.
+- Using rolls tracker.
+- Tracking the time it takes to win.
+- Saving the best time to localStorage (Browser API) to keep data until it's cleared from the browser.
 
 
 ## Home Page 
@@ -25,4 +29,5 @@ Get all of the dice to be the same number! 🎲
 - Dynamic website
 - Mapping
 - Props
-- Effect | State
+- useEffect | useState
+
